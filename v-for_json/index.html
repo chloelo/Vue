@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>v-for json Practice</title>
+  <script src='https://cdnjs.cloudflare.com/ajax/libs/vue/2.6.10/vue.min.js'></script>
+  <link rel="stylesheet" href="css/layout.css">
+</head>
+
+<body>
+
+  <div id="app" class="app">
+    <div v-for="lesson in lessons" class="lesson">
+      <h1><a :href="lesson.url">{{lesson.title}}</a></h1>
+      <div class="section-img">
+        <img :src="lesson.imgSrc">
+      </div>
+      <h3 class="author">- {{lesson.author}}</h3>
+      <p>{{lesson.descript}}</p>
+    </div>
+  </div>
+  <script>
+    new Vue({
+      el: '#app',
+      data: {
+        lessons: [],
+      },
+      mounted() {
+        fetch('./data.json')
+          .then(res => res.json())
+          .then(lessons => this.lessons = lessons);
+      },
+    })
+  </script>
+</body>
+
+</html>
